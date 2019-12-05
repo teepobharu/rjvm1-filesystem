@@ -1,16 +1,23 @@
-package com.rtjvm.scala.oop.filesystem.files
+package com.rtjvm.scala.oop.files
 
-abstract class DirEntry(val parentPath:String, val name: String) {
+/**
+  * Created by Daniel on 28-Oct-17.
+  */
+abstract class DirEntry(val parentPath: String, val name: String) {
+
   def path: String = {
     val separatorIfNecessary =
       if (Directory.ROOT_PATH.equals(parentPath)) ""
-    else Directory.SEPARATOR
+      else Directory.SEPARATOR
 
     parentPath + separatorIfNecessary + name
   }
+
   def asDirectory: Directory
   def asFile: File
+
   def isDirectory: Boolean
   def isFile: Boolean
+
   def getType: String
 }

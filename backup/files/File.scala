@@ -1,26 +1,32 @@
-package com.rtjvm.scala.oop.filesystem.files
+package com.rtjvm.scala.oop.files
 
-import com.rtjvm.scala.oop.filesystem.filesystem.FilesystemException
+import com.rtjvm.scala.oop.filesystem.FilesystemException
 
-class File (override val parentPath: String, override val name: String, contents : String)
-  extends DirEntry(parentPath , name){
+/**
+  * Created by Daniel on 29-Oct-17.
+  */
+class File(override val parentPath: String, override val name: String, val contents: String)
+extends DirEntry(parentPath, name) {
+
   def asDirectory: Directory =
     throw new FilesystemException("A file cannot be converted to a directory!")
 
-  def getType: String = "file"
+  def asFile: File = this
 
   def isDirectory: Boolean = false
-  def asFile: File = this
   def isFile: Boolean = true
+
+  def getType: String = "File"
+
   def setContents(newContents: String): File =
     new File(parentPath, name, newContents)
+
   def appendContents(newContents: String): File =
     setContents(contents + "\n" + newContents)
 }
 
-object File{
+object File {
 
   def empty(parentPath: String, name: String): File =
     new File(parentPath, name, "")
-
 }

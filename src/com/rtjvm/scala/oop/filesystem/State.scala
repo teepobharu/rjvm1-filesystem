@@ -1,8 +1,12 @@
-package com.rtjvm.scala.oop.filesystem.filesystem
+package com.rtjvm.scala.oop.filesystem
 
-import com.rtjvm.scala.oop.filesystem.files.Directory
+import com.rtjvm.scala.oop.files.Directory
 
-class State(val root: Directory, val wd: Directory, val output: String){
+/**
+  * Created by Daniel on 28-Oct-17.
+  */
+class State(val root: Directory, val wd: Directory, val output: String) {
+
   def show: Unit = {
     println(output)
     print(State.SHELL_TOKEN)
@@ -10,12 +14,12 @@ class State(val root: Directory, val wd: Directory, val output: String){
 
   def setMessage(message: String): State =
     State(root, wd, message)
+
 }
 
 object State {
   val SHELL_TOKEN = "$ "
+
   def apply(root: Directory, wd: Directory, output: String = ""): State =
     new State(root, wd, output)
 }
-
-
